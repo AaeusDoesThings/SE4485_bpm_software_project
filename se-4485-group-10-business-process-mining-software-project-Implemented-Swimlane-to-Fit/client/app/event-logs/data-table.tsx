@@ -20,7 +20,7 @@ import { Entry } from "./columns"
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
-  handleRowClick: Function
+  handleRowClick?: (row: TData) => void
 }
 
 export function DataTable<TData, TValue>({
@@ -61,9 +61,7 @@ export function DataTable<TData, TValue>({
               <TableRow
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
-                onClick={() => {
-                  handleRowClick(row.original)
-                }}
+                onClick={handleRowClick ? () => handleRowClick(row.original) : undefined}
               >
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>

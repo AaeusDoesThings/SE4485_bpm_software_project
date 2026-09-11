@@ -7,7 +7,7 @@ import { ColumnDef } from "@tanstack/react-table"
 import styles from "./OverviewSection.module.css"
 import { Entry } from "../event-logs/columns"
 
-interface OverviewSectionProps<TData, TValue> {
+interface OverviewSectionProps<TData extends Entry, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
   xml: string
@@ -16,7 +16,7 @@ interface OverviewSectionProps<TData, TValue> {
   viewerRef: RefObject<BpmnViewerHandle | null>
 }
 
-export default function OverviewSection<TData, TValue>({
+export default function OverviewSection<TData extends Entry, TValue>({
   columns,
   data,
   xml,
