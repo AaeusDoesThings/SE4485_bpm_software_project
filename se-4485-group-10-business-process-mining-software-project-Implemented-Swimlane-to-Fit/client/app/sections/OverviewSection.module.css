@@ -1,0 +1,77 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.header {
+  flex-shrink: 0;
+  padding: 1rem;
+}
+
+.panelGroup {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+}
+
+.panelHeader {
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 500;
+}
+
+.panelBody {
+  flex: 1;
+  overflow: auto;
+  min-height: 0;
+}
+
+.resizeHandle {
+  width: 12px;
+  flex-shrink: 0;
+  cursor: col-resize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: background 0.15s;
+}
+
+.resizeHandle:hover {
+  background: #e5e7eb;
+}
+
+.resizeBar {
+  width: 4px;
+  height: 40px;
+  border-radius: 9999px;
+  background: #95989c;
+}
+.title{
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.panelHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+  font-weight: 500;
+}
+
+.panelNav {
+  font-size: 15px;
+  color: var(--color-text-tertiary, #2e2f3179);
+}
