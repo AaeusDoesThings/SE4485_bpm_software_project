@@ -1,0 +1,51 @@
+Case_ID,Activity,Timestamp,Role,Details
+Case_001,Submit Request,2026-09-01 08:00:00,Customer,Customer submitted a service request
+Case_001,Review Request,2026-09-01 09:00:00,Support Agent,Support agent reviewed the request
+Case_001,Assign Technician,2026-09-01 10:00:00,Dispatcher,Technician assigned to the case
+Case_001,Perform Service,2026-09-01 11:00:00,Technician,Technician performed the requested service
+Case_001,Close Case,2026-09-01 12:00:00,Support Agent,Service completed and case closed
+Case_002,Submit Request,2026-09-02 08:00:00,Customer,Customer submitted a service request
+Case_002,Review Request,2026-09-02 09:00:00,Support Agent,Support agent reviewed the request
+Case_002,Assign Technician,2026-09-02 10:00:00,Dispatcher,Technician assigned to the case
+Case_002,Perform Service,2026-09-02 11:00:00,Technician,Technician performed the requested service
+Case_002,Close Case,2026-09-02 12:00:00,Support Agent,Service completed and case closed
+Case_003,Submit Request,2026-09-03 08:00:00,Customer,Customer submitted a service request
+Case_003,Review Request,2026-09-03 09:00:00,Support Agent,Support agent reviewed the request
+Case_003,Assign Technician,2026-09-03 10:00:00,Dispatcher,Technician assigned to the case
+Case_003,Perform Service,2026-09-03 11:00:00,Technician,Technician performed the requested service
+Case_003,Close Case,2026-09-03 12:00:00,Support Agent,Service completed and case closed
+Case_004,Submit Request,2026-09-04 08:00:00,Customer,Customer submitted a service request
+Case_004,Review Request,2026-09-04 09:00:00,Support Agent,Support agent reviewed the request
+Case_004,Assign Technician,2026-09-04 10:00:00,Dispatcher,Technician assigned to the case
+Case_004,Perform Service,2026-09-04 11:00:00,Technician,Technician performed the requested service
+Case_004,Close Case,2026-09-04 12:00:00,Support Agent,Service completed and case closed
+Case_005,Submit Request,2026-09-05 08:00:00,Customer,Customer submitted a service request
+Case_005,Review Request,2026-09-05 09:00:00,Support Agent,Support agent reviewed the request
+Case_005,Assign Technician,2026-09-05 10:00:00,Dispatcher,Technician assigned to the case
+Case_005,Perform Service,2026-09-05 11:00:00,Technician,Technician performed the requested service
+Case_005,Close Case,2026-09-05 12:00:00,Support Agent,Service completed and case closed
+Case_006,Submit Request,2026-09-06 08:00:00,Customer,Customer submitted a service request
+Case_006,Review Request,2026-09-06 09:00:00,Support Agent,Support agent reviewed the request
+Case_006,Assign Technician,2026-09-06 10:00:00,Dispatcher,Technician assigned to the case
+Case_006,Perform Service,2026-09-06 11:00:00,Technician,Technician performed the requested service
+Case_006,Close Case,2026-09-06 12:00:00,Support Agent,Service completed and case closed
+Case_007,Submit Request,2026-09-07 08:00:00,Customer,Customer submitted a service request
+Case_007,Review Request,2026-09-07 09:00:00,Support Agent,Support agent reviewed the request
+Case_007,Assign Technician,2026-09-07 10:00:00,Dispatcher,Technician assigned to the case
+Case_007,Perform Service,2026-09-07 11:00:00,Technician,Technician performed the requested service
+Case_007,Close Case,2026-09-07 12:00:00,Support Agent,Service completed and case closed
+Case_008,Submit Request,2026-09-08 08:00:00,Customer,Customer submitted a service request
+Case_008,Review Request,2026-09-08 09:00:00,Support Agent,Support agent reviewed the request
+Case_008,Assign Technician,2026-09-08 10:00:00,Dispatcher,Technician assigned to the case
+Case_008,Perform Service,2026-09-08 11:00:00,Technician,Technician performed the requested service
+Case_008,Close Case,2026-09-08 12:00:00,Support Agent,Service completed and case closed
+Case_009,Submit Request,2026-09-09 08:00:00,Customer,Customer submitted a service request
+Case_009,Review Request,2026-09-09 09:00:00,Support Agent,Support agent reviewed the request
+Case_009,Assign Technician,2026-09-09 10:00:00,Dispatcher,Technician assigned to the case
+Case_009,Perform Service,2026-09-09 11:00:00,Technician,Technician performed the requested service
+Case_009,Close Case,2026-09-09 12:00:00,Support Agent,Service completed and case closed
+Case_010,Submit Request,2026-09-10 08:00:00,Customer,Customer submitted a service request
+Case_010,Review Request,2026-09-10 09:00:00,Support Agent,Support agent reviewed the request
+Case_010,Assign Technician,2026-09-10 10:00:00,Dispatcher,Technician assigned to the case
+Case_010,Perform Service,2026-09-10 11:00:00,Technician,Technician performed the requested service
+Case_010,Close Case,2026-09-10 12:00:00,Support Agent,Service completed and case closed

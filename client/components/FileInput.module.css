@@ -1,0 +1,25 @@
+.fileInput {
+  color: black;
+  font-weight: 600;
+  font-size: 0.875rem;
+  height: 2.5rem;
+  padding: 0rem 1rem 0rem 0rem;
+  width: 100%;
+}
+
+.fileInput::file-selector-button {
+  background-color: black;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-right: 0.75rem;
+  font-size: 0.875rem;
+  height: 100%;
+}
+
+.fileInput::file-selector-button:hover {
+  background-color: #333;
+}

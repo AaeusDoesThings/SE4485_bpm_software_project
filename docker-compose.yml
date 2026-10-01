@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./server
+    container_name: fastapi_server
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./server:/app
+    restart: always
+
+  frontend:
+    build: ./client
+    container_name: nextjs_client
+    ports:
+      - "3000:3000"
+    restart: always
+
