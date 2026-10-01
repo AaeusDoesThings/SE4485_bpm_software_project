@@ -19,7 +19,7 @@ docker compose version
 ### Clone the repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/AaeusDoesThings/SE4485_bpm_software_project.git bpm_software_project
 cd bpm_software_project
 ```
 
@@ -44,19 +44,13 @@ To run the application in the background:
 docker compose up --build -d
 ```
 
-### Pull base images
+### Pull base images manually (optional)
 
-The services are built locally rather than pulled from a container registry. To pull the base images used by the Dockerfiles:
+Docker pulls these base images automatically during the build if they are not already available locally. To pull them manually:
 
 ```bash
 docker pull python:3.11-slim
 docker pull node:20
-```
-
-Then build and start the application:
-
-```bash
-docker compose up --build
 ```
 
 ### View logs
@@ -115,3 +109,69 @@ npm run dev
 ```
 
 The frontend runs at http://localhost:3000.
+
+
+## Update an Existing Clone
+
+If you already cloned an older version, you do not need to clone it again.
+
+### Open the existing project folder
+
+```bash
+cd path/to/your/existing-project
+```
+
+### Check for local changes
+
+```bash
+git status
+```
+
+If you have uncommitted changes, save them before updating:
+
+```bash
+git add .
+git commit -m "Save local changes before update"
+```
+
+### Update the repository URL
+
+If the existing clone already has an `origin` remote, update it with:
+
+```bash
+git remote set-url origin https://github.com/AaeusDoesThings/SE4485_bpm_software_project.git
+```
+
+If it does not have an `origin` remote, add one instead:
+
+```bash
+git remote add origin https://github.com/AaeusDoesThings/SE4485_bpm_software_project.git
+```
+
+Verify the remote:
+
+```bash
+git remote -v
+```
+
+### Download the latest version
+
+```bash
+git fetch origin
+git pull --rebase origin main
+```
+
+If Git reports conflicts, resolve them in the listed files, then run:
+
+```bash
+git add .
+git commit -m "Resolve update conflicts"
+```
+
+### Rebuild and start the application
+
+Run this from the project root, where `docker-compose.yml` is located:
+
+```bash
+docker compose up --build
+```
