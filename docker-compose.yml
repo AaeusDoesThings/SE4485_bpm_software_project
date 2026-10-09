@@ -15,5 +15,7 @@ services:
     container_name: nextjs_client
     ports:
       - "3000:3000"
+    volumes:
+      - ./client:/app
     restart: always
 
