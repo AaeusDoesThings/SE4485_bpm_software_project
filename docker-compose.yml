@@ -13,9 +13,12 @@ services:
   frontend:
     build: ./client
     container_name: nextjs_client
+    command: npm run dev
     ports:
       - "3000:3000"
     volumes:
       - ./client:/app
-    restart: always
+      - /app/node_modules
+      - /app/.next
+    restart: unless-stopped
 

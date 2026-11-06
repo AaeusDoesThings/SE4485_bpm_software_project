@@ -67,19 +67,16 @@ docker compose logs -f frontend
 ```
 
 ### Stop the application
-
 ```bash
 docker compose down
 ```
 
 To also remove orphaned containers:
-
 ```bash
 docker compose down --remove-orphans
 ```
 
 ### Rebuild after code changes
-
 ```bash
 docker compose up --build
 ```
@@ -87,7 +84,6 @@ docker compose up --build
 ## Run locally without Docker
 
 ### Backend
-
 ```bash
 cd server
 python3 -m venv .venv
@@ -99,7 +95,6 @@ fastapi dev
 The backend runs at http://localhost:8000.
 
 ### Frontend
-
 In a separate terminal:
 
 ```bash
@@ -112,7 +107,6 @@ The frontend runs at http://localhost:3000.
 
 
 ## Update an Existing Clone
-
 If you already cloned an older version, you do not need to clone it again.
 
 ### Open the existing project folder
