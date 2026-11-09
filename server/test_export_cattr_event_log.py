@@ -1,5 +1,7 @@
 import unittest
 from datetime import datetime
+from pathlib import Path
+from tempfile import TemporaryDirectory
 from zoneinfo import ZoneInfo
 
 from export_cattr_event_log import (
@@ -7,6 +9,7 @@ from export_cattr_event_log import (
     format_event_timestamp,
     parse_user_roles,
     validate_project_names,
+    write_event_log,
 )
 
 
@@ -84,6 +87,39 @@ class CattrEventLogExportTests(unittest.TestCase):
         )
 
         self.assertEqual(timestamp, "2026-11-09T14:02:00-06:00")
+
+    def test_writes_sequential_numbered_snapshots_without_overwriting(self):
+        events = build_event_rows(
+            self.records,
+            {3: "HR Manager"},
+            ZoneInfo("America/Chicago"),
+        )
+
+        with TemporaryDirectory() as temp_dir:
+            output_base = Path(temp_dir) / "cattr_event_log.csv"
+            first = write_event_log(events, output_base)
+            second = write_event_log(events, output_base)
+
+            self.assertEqual(first.name, "cattr_event_log_001.csv")
+            self.assertEqual(second.name, "cattr_event_log_002.csv")
+            self.assertNotEqual(first.read_text(), "")
+            self.assertEqual(first.read_text(), second.read_text())
+
+    def test_snapshot_numbering_skips_existing_sequence(self):
+        events = build_event_rows(
+            self.records,
+            {3: "HR Manager"},
+            ZoneInfo("America/Chicago"),
+        )
+
+        with TemporaryDirectory() as temp_dir:
+            output_base = Path(temp_dir) / "events.csv"
+            (Path(temp_dir) / "events_001.csv").touch()
+            (Path(temp_dir) / "events_003.csv").touch()
+
+            output = write_event_log(events, output_base)
+
+            self.assertEqual(output.name, "events_002.csv")
 
 
 if __name__ == "__main__":

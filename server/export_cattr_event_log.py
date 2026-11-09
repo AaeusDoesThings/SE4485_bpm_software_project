@@ -29,6 +29,23 @@ def format_event_timestamp(value: datetime, timezone: ZoneInfo) -> str:
     return value.replace(tzinfo=timezone).isoformat(timespec="seconds")
 
 
+def write_event_log(events: list[dict[str, str]], output_base: Path) -> Path:
+    output_base.parent.mkdir(parents=True, exist_ok=True)
+    sequence = 1
+    while True:
+        output_path = output_base.with_name(
+            f"{output_base.stem}_{sequence:03d}{output_base.suffix}"
+        )
+        try:
+            with output_path.open("x", newline="", encoding="utf-8") as csv_file:
+                writer = csv.DictWriter(csv_file, fieldnames=CSV_COLUMNS)
+                writer.writeheader()
+                writer.writerows(events)
+            return output_path
+        except FileExistsError:
+            sequence += 1
+
+
 def build_event_rows(
     records: list[dict],
     user_roles: dict[int, str],
@@ -90,7 +107,10 @@ def create_parser() -> argparse.ArgumentParser:
         "--output",
         type=Path,
         default=Path("/exports/cattr_event_log.csv"),
-        help="Output CSV path (default: /exports/cattr_event_log.csv).",
+        help=(
+            "Output filename base; a numbered snapshot is created without overwriting "
+            "(default: /exports/cattr_event_log.csv)."
+        ),
     )
     return parser
 
@@ -203,16 +223,11 @@ def main() -> int:
         records = query_records(connection, project_names)
         validate_project_names(records, project_names)
         events = build_event_rows(records, user_roles, timezone)
-
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        with args.output.open("w", newline="", encoding="utf-8") as csv_file:
-            writer = csv.DictWriter(csv_file, fieldnames=CSV_COLUMNS)
-            writer.writeheader()
-            writer.writerows(events)
+        output_path = write_event_log(events, args.output)
     finally:
         connection.close()
 
-    print(f"Wrote {len(events)} individual time intervals to {args.output}")
+    print(f"Wrote {len(events)} individual time intervals to {output_path}")
     return 0
 
 

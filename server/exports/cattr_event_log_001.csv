@@ -1,0 +1,18 @@
+Case_Id,Activity,Timestamp,Role
+ONB-TEST-001,Complete Orientation,2026-11-09T15:22:43-06:00,HR Manager
+ONB-TEST-001,Prepare Equipment,2026-11-09T15:22:52-06:00,HR Manager
+ONB-TEST-001,Complete Orientation,2026-11-09T15:22:59-06:00,HR Manager
+ONB-TEST-001,Review Documents,2026-11-09T15:23:07-06:00,HR Manager
+ONB-TEST-001,Submit Documents,2026-11-09T15:23:14-06:00,HR Manager
+ONB-TEST-001,Prepare Equipment,2026-11-09T15:23:42-06:00,HR Manager
+ONB-TEST-001,Review Documents,2026-11-09T15:25:53-06:00,HR Manager
+ONB-TEST-001,Submit Documents,2026-11-09T15:26:08-06:00,HR Manager
+ONB-TEST-001,Complete Orientation,2026-11-09T15:26:17-06:00,HR Manager
+ONB-TEST-001,Complete Documentation,2026-11-09T16:39:09-06:00,New Hire
+ONB-TEST-001,Training Module 1,2026-11-09T16:39:24-06:00,New Hire
+ONB-TEST-002,Complete Orientation,2026-11-09T15:32:31-06:00,HR Manager
+ONB-TEST-002,Prepare Equipment,2026-11-09T15:32:46-06:00,HR Manager
+ONB-TEST-002,Submit Documents,2026-11-09T15:33:00-06:00,HR Manager
+ONB-TEST-002,Review Documents,2026-11-09T15:33:13-06:00,HR Manager
+ONB-TEST-002,Complete Documentation,2026-11-09T16:39:37-06:00,New Hire
+ONB-TEST-002,Training Module 1,2026-11-09T16:39:51-06:00,New Hire

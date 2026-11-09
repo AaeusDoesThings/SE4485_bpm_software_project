@@ -43,7 +43,7 @@ providing one `--user-role USER_ID=ROLE` option per user:
 ```bash
 docker compose -f cattr/docker-compose.yml --profile tools run --rm event-log-exporter \
   --project ONB-TEST-001 --project ONB-TEST-002 \
-  --user-role 3="HR Manager" \
+  --user-role '3=HR Manager' \
   --stored-timezone America/Chicago \
   --output /exports/cattr_event_log.csv
 ```
@@ -54,9 +54,12 @@ must match the timezone used to interpret Cattr's timezone-naive MySQL
 and writes it as an ISO 8601 timestamp with an offset. Confirm the chosen
 timezone against Cattr's displayed time before using the log for analysis.
 
-The CSV is written to `server/exports/cattr_event_log.csv`. Upload it through
-the process-mining app. Export only the intended test projects; each project
-name is used as a case ID, and task names should be consistent across cases.
+The `--output` value is a filename base. Each run creates a numbered snapshot
+without overwriting previous exports: `server/exports/cattr_event_log_001.csv`,
+then `_002.csv`, and so on. If a number already exists, the exporter skips it.
+Open the printed output path and upload that CSV through the process-mining app.
+Export only the intended test projects; each project name is used as a case ID,
+and task names should be consistent across cases.
 
 ## Prerequisites
 Install:
