@@ -94,6 +94,22 @@ fastapi dev
 
 The backend runs at http://localhost:8000.
 
+### Generate a synthetic onboarding event log
+
+The generator assigns each activity to a role from the predefined catalog in
+`server/generate_onboarding_csv.py`. Activities are grouped by responsibility:
+HR Manager coordinates onboarding and follow-ups, New Hire completes documents
+and training, and IT Staff handles devices, accounts, and technical access.
+No AI service is needed.
+
+```bash
+python server/generate_onboarding_csv.py --cases 10 --output server/examples/synthetic_onboarding.csv
+```
+
+The generated CSV can be uploaded through the app. It contains synthetic data,
+not actual employee records. Use `--start-date YYYY-MM-DD` to choose the first
+case date, and `--seed NUMBER` to make output repeatable.
+
 ### Frontend
 In a separate terminal:
 

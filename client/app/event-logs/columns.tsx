@@ -5,7 +5,8 @@ import { ColumnDef } from "@tanstack/react-table"
 export type Entry = {
   Case_ID: string
   Activity: string
-  Timestamp: Date
+  Timestamp: string
+  Role: string
 }
 
 export const columns: ColumnDef<Entry>[] = [

@@ -23,6 +23,8 @@ from pm4py.objects.bpmn.obj import BPMN
 from io import BytesIO
 import pm4py
 
+from event_log_mapping import normalize_case_id_column
+
 from os import listdir
 from os.path import isfile, join
 
@@ -67,12 +69,14 @@ def read_availible_logs():
 @app.get("/event-log/{file_name}")
 def read_event_log(file_name: str):
   df = pd.read_csv(f'examples/{file_name}')
+  df = normalize_case_id_column(df)
 
   return df.head(50).to_dict(orient="records")
 
 @app.get("/diagram/{file_name}")
 def read_diagram(file_name: str):
   df = pd.read_csv(f'examples/{file_name}')
+  df = normalize_case_id_column(df)
 
   # Convert the 'Timestamp' column to a datetime format
   df['Timestamp'] = pd.to_datetime(df['Timestamp'])
@@ -110,6 +114,7 @@ def read_diagram(file_name: str):
 async def read_event_log(file: UploadFile = File(...)):
   contents = await file.read()
   df = pd.read_csv(io.StringIO(contents.decode('utf-8')))
+  df = normalize_case_id_column(df)
 
   return df.head(50).to_dict(orient="records")
 
@@ -117,6 +122,7 @@ async def read_event_log(file: UploadFile = File(...)):
 async def create_diagram(file: UploadFile = File(...)):
   contents = await file.read()
   df = pd.read_csv(io.StringIO(contents.decode('utf-8')))
+  df = normalize_case_id_column(df)
 
   # Convert the 'Timestamp' column to a datetime format
   df['Timestamp'] = pd.to_datetime(df['Timestamp'])

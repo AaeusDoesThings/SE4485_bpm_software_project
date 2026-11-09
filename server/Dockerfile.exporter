@@ -1,0 +1,9 @@
+FROM python:3.11-slim
+
+WORKDIR /app
+
+RUN pip install --no-cache-dir mysql-connector-python
+
+COPY export_cattr_event_log.py .
+
+ENTRYPOINT ["python", "/app/export_cattr_event_log.py"]
