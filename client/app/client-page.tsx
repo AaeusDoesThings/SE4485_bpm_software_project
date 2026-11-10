@@ -16,17 +16,37 @@ import styles from "./ClientPage.module.css"
 type Section = "overview" | "eventlog" | "bpmn"
 
 export default function ClientPage() {
-  const { eventLogData, bpmnXml, processFile } = useProcessFile()
+  const {
+    eventLogData,
+    bpmnXml,
+    savedEventLogs,
+    error,
+    isLoading,
+    processFile,
+    loadSavedEventLog,
+  } = useProcessFile()
   const [activeSection, setActiveSection] = useState<Section>("overview")
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false)
   const [isUploadOpen, setIsUploadOpen] = useState(false)
 
   const viewerRef = useRef<BpmnViewerHandle>(null)
 
-  const handleFileSubmit = (file: File) => {
-    processFile(file)
-    setIsUploadOpen(false)
-    setActiveSection("bpmn")
+  const handleFileSubmit = async (file: File) => {
+    if (await processFile(file)) {
+      setIsUploadOpen(false)
+      setActiveSection("bpmn")
+      return true
+    }
+    return false
+  }
+
+  const handleLoadSavedEventLog = async (id: number) => {
+    if (await loadSavedEventLog(id)) {
+      setIsUploadOpen(false)
+      setActiveSection("bpmn")
+      return true
+    }
+    return false
   }
 
   return (
@@ -34,6 +54,10 @@ export default function ClientPage() {
       <div className={styles.appBody}>
         <UploadSection
           onFileSubmit={handleFileSubmit}
+          onLoadSavedEventLog={handleLoadSavedEventLog}
+          savedEventLogs={savedEventLogs}
+          error={error}
+          isLoading={isLoading}
           isOpen={isUploadOpen}
           onClose={() => setIsUploadOpen(false)}
         />

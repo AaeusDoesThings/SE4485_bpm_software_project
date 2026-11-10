@@ -4,6 +4,15 @@ services:
   backend:
     build: ./server
     container_name: fastapi_server
+    depends_on:
+      bpm-db:
+        condition: service_healthy
+    environment:
+      BPM_DB_HOST: bpm-db
+      BPM_DB_PORT: "3306"
+      BPM_DB_NAME: bpm
+      BPM_DB_USER: bpm_app
+      BPM_DB_PASSWORD: "${BPM_DB_PASSWORD:-bpm_local_only}"
     ports:
       - "8000:8000"
     volumes:
@@ -22,3 +31,23 @@ services:
       - /app/.next
     restart: unless-stopped
 
+  bpm-db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: bpm
+      MYSQL_USER: bpm_app
+      MYSQL_PASSWORD: "${BPM_DB_PASSWORD:-bpm_local_only}"
+      MYSQL_ROOT_PASSWORD: "${BPM_DB_ROOT_PASSWORD:-bpm_root_local_only}"
+    ports:
+      - "127.0.0.1:3307:3306"
+    volumes:
+      - bpm_database:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p\"$$MYSQL_ROOT_PASSWORD\""]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+volumes:
+  bpm_database:

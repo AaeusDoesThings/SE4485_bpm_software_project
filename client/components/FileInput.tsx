@@ -1,22 +1,32 @@
 "use client"
 
 import styles from "./FileInput.module.css"
-import { useContext, useState } from "react"
+import { useState } from "react"
 import { Button } from "./ui/button"
-import { Field, FieldDescription, FieldLabel } from "./ui/field"
+import { Field, FieldDescription } from "./ui/field"
 import { Input } from "./ui/input"
+import { SavedEventLog } from "@/app/hooks/useProcessFile"
 
 interface FileInputProps {
-  onFileSubmit: (file: File) => void
+  onFileSubmit: (file: File) => Promise<boolean>
+  onLoadSavedEventLog: (id: number) => Promise<boolean>
+  savedEventLogs: SavedEventLog[]
+  error?: string
+  isLoading: boolean
 }
 
-export default function FileInput({ onFileSubmit }:FileInputProps) {
+export default function FileInput({
+  onFileSubmit,
+  onLoadSavedEventLog,
+  savedEventLogs,
+  error,
+  isLoading,
+}: FileInputProps) {
   const [file, setFile] = useState<File>()
+  const [selectedLogId, setSelectedLogId] = useState("")
 
   const handleSubmit = async () => {
-    if (file?.type != "text/csv") return
-
-    onFileSubmit(file)
+    if (file) await onFileSubmit(file)
   }
 
   return (
@@ -37,7 +47,40 @@ export default function FileInput({ onFileSubmit }:FileInputProps) {
           Upload a .csv file with your event log.
         </FieldDescription>
       </Field>
-      <Button onClick={handleSubmit}>Submit</Button>
+      <Button onClick={handleSubmit} disabled={!file || isLoading}>
+        {isLoading ? "Saving..." : "Import CSV"}
+      </Button>
+
+      <div className="space-y-2 border-t pt-4">
+        <h2 className="font-semibold">Saved event logs</h2>
+        {savedEventLogs.length === 0 ? (
+          <p className="text-sm text-muted-foreground">No saved logs yet.</p>
+        ) : (
+          <>
+            <select
+              aria-label="Saved event logs"
+              className="w-full rounded-md border bg-background px-3 py-2 text-sm"
+              value={selectedLogId}
+              onChange={(event) => setSelectedLogId(event.target.value)}
+            >
+              <option value="">Select a saved log</option>
+              {savedEventLogs.map((log) => (
+                <option key={log.id} value={log.id}>
+                  {log.name} — {log.event_count} events — {new Date(log.imported_at_utc).toLocaleString()}
+                </option>
+              ))}
+            </select>
+            <Button
+              variant="outline"
+              disabled={!selectedLogId || isLoading}
+              onClick={() => void onLoadSavedEventLog(Number(selectedLogId))}
+            >
+              Load selected log
+            </Button>
+          </>
+        )}
+      </div>
+      {error && <p role="alert" className="text-sm text-destructive">{error}</p>}
     </div>
   )
 }
