@@ -26,8 +26,7 @@ def parse_user_roles(values: list[str]) -> dict[int, str]:
 def format_event_timestamp(value: datetime, timezone: ZoneInfo) -> str:
     if value.tzinfo is not None:
         raise ValueError("Expected Cattr's timezone-naive MySQL DATETIME value")
-    return value.replace(tzinfo=timezone).isoformat(timespec="seconds")
-
+    return value.replace(tzinfo=timezone).isoformat(sep=" ", timespec="seconds")
 
 def write_event_log(events: list[dict[str, str]], output_base: Path) -> Path:
     output_base.parent.mkdir(parents=True, exist_ok=True)
@@ -68,6 +67,7 @@ def build_event_rows(
                 "Case_Id": record["project_name"],
                 "Activity": record["task_name"],
                 "Timestamp": format_event_timestamp(record["end_at"], timezone),
+                
                 "Role": user_roles[record["user_id"]],
             }
         )

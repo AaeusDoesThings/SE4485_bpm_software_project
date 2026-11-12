@@ -40,10 +40,13 @@ Use the listed Cattr user IDs to map each person to their actual business role
 (not Cattr's permission role or username). Export the selected projects by
 providing one `--user-role USER_ID=ROLE` option per user:
 
+<!-- Use -f if you are not in the cattr folder -->
 ```bash
-docker compose -f cattr/docker-compose.yml --profile tools run --rm event-log-exporter \
-  --project ONB-TEST-001 --project ONB-TEST-002 \
+docker compose --profile tools run --rm event-log-exporter \
+  --project ONB-TEST-001 --project ONB-TEST-002 --project ONB-TEST-003 \
+  --user-role '2=New Hire' \
   --user-role '3=HR Manager' \
+  --user-role '4=IT Staff' \
   --stored-timezone America/Chicago \
   --output /exports/cattr_event_log.csv
 ```
@@ -173,4 +176,9 @@ To recreate the application container:
 
 ```bash
 docker compose up -d --force-recreate app
+```
+
+## Rebuilding after exporting
+```bash
+docker compose -f cattr/docker-compose.yml --profile tools build event-log-exporter
 ```
